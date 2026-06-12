@@ -1,0 +1,163 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+provider: Pika
+providerId: pika
+created: '2026-06-12'
+modified: '2026-06-12'
+reconciled: true
+type: freemium
+description: >
+  Pika offers a consumer credit-based subscription model for platform access plus
+  pay-per-use API pricing through fal.ai for developer integrations. Consumer plans
+  include monthly video credits while the API tier is usage-based per video generated.
+plans:
+  - name: Free
+    type: free
+    description: Basic access with limited credits for personal, non-commercial use
+    price: 0
+    currency: USD
+    billingPeriod: monthly
+    features:
+      - quota:
+          metric: video_credits
+          limit: 80
+          timeFrame: monthly
+      - boolean:
+          feature: commercial_use
+          value: false
+      - boolean:
+          feature: pika_2_5_480p
+          value: true
+      - boolean:
+          feature: pika_2_5_all_resolutions
+          value: false
+      - boolean:
+          feature: pikascenes
+          value: true
+      - boolean:
+          feature: pikaframes
+          value: false
+      - boolean:
+          feature: watermark_free_downloads
+          value: false
+
+  - name: Standard
+    type: paid
+    description: Standard plan with 700 monthly credits and full resolution access
+    price: 8
+    priceMonthly: 10
+    currency: USD
+    billingPeriod: monthly
+    billingNote: $8/month billed annually or $10/month billed monthly
+    features:
+      - quota:
+          metric: video_credits
+          limit: 700
+          timeFrame: monthly
+      - boolean:
+          feature: commercial_use
+          value: true
+      - boolean:
+          feature: pika_2_5_all_resolutions
+          value: true
+      - boolean:
+          feature: pikascenes
+          value: true
+      - boolean:
+          feature: pikaframes
+          value: true
+      - boolean:
+          feature: pikaffects
+          value: true
+      - boolean:
+          feature: watermark_free_downloads
+          value: true
+
+  - name: Pro
+    type: paid
+    description: Best value plan with 2,300 monthly credits and faster generation speeds
+    price: 28
+    priceMonthly: 35
+    currency: USD
+    billingPeriod: monthly
+    billingNote: $28/month billed annually or $35/month billed monthly
+    features:
+      - quota:
+          metric: video_credits
+          limit: 2300
+          timeFrame: monthly
+      - boolean:
+          feature: commercial_use
+          value: true
+      - boolean:
+          feature: pika_2_5_all_resolutions
+          value: true
+      - boolean:
+          feature: fast_generation
+          value: true
+      - boolean:
+          feature: watermark_free_downloads
+          value: true
+
+  - name: Fancy
+    type: paid
+    description: Top-tier plan with 6,000 monthly credits and fastest generation speeds
+    price: 76
+    priceMonthly: 95
+    currency: USD
+    billingPeriod: monthly
+    billingNote: $76/month billed annually or $95/month billed monthly
+    features:
+      - quota:
+          metric: video_credits
+          limit: 6000
+          timeFrame: monthly
+      - boolean:
+          feature: commercial_use
+          value: true
+      - boolean:
+          feature: pika_2_5_all_resolutions
+          value: true
+      - boolean:
+          feature: fastest_generation
+          value: true
+      - boolean:
+          feature: watermark_free_downloads
+          value: true
+
+  - name: API - Pay Per Use (via fal.ai)
+    type: metered
+    description: >
+      Usage-based API access via fal.ai for programmatic video generation.
+      No subscription required; billed per video generated.
+    price: 0
+    currency: USD
+    billingPeriod: per-use
+    features:
+      - metered:
+          metric: text_to_video_720p_5s
+          price: 0.20
+          unit: per video
+          currency: USD
+      - metered:
+          metric: text_to_video_1080p_5s
+          price: 0.45
+          unit: per video
+          currency: USD
+      - quota:
+          metric: video_credits_consumer
+          note: Consumer plan credits cost approximately 10-80 credits per video depending on model and duration
+
+creditCosts:
+  - feature: Standard video (Pika 2.5 Turbo, 5s)
+    credits: 10
+  - feature: Pro quality video (Pika 2.5 Pro, 5s)
+    credits: 20
+  - feature: Extended video (10s, 1080p)
+    credits: 80
+
+references:
+  - url: https://pika.art/pricing
+    description: Official Pika pricing page
+  - url: https://fal.ai/models/fal-ai/pika/v2.2/text-to-video
+    description: fal.ai Pika 2.2 API pricing

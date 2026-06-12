@@ -1,0 +1,58 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+provider: Pika
+providerId: pika
+created: '2026-06-12'
+modified: '2026-06-12'
+description: >
+  Pika enforces rate limits on its video generation API to ensure platform stability.
+  The primary rate limit is 20 video generations per minute for all API users.
+  The fal.ai-hosted API uses asynchronous queue-based processing with webhook
+  support for completion notifications, mitigating the impact of rate limits on
+  long-running generation jobs.
+retryAfter:
+  header: Retry-After
+  description: When rate limit is exceeded, response includes Retry-After header indicating seconds until next request is allowed
+throttled:
+  statusCode: 429
+  description: Too Many Requests - rate limit exceeded
+limits:
+  - scope: account
+    metric: video_generations
+    limit: 20
+    timeFrame: per_minute
+    description: Maximum 20 video generations per minute for all API users
+    source: https://pika.art/api
+  - scope: account
+    metric: concurrent_queue_jobs
+    limit: null
+    timeFrame: concurrent
+    description: Queue-based async processing; concurrent job limits not publicly documented
+
+async:
+  supported: true
+  description: >
+    Pika API via fal.ai uses asynchronous queue-based processing. Requests are
+    submitted to a queue and results retrieved via polling or webhook callback.
+  endpoints:
+    submit: fal.queue.submit()
+    status: fal.queue.status()
+    result: fal.queue.result()
+  webhooks:
+    supported: true
+    description: Optional webhookUrl parameter on queue submit for completion callbacks
+
+errors:
+  - statusCode: 429
+    description: Rate limit exceeded
+    resolution: Wait for Retry-After period before retrying
+  - statusCode: 401
+    description: Unauthorized - invalid or missing FAL_KEY API credential
+  - statusCode: 400
+    description: Bad Request - invalid input parameters
+
+references:
+  - url: https://pika.art/api
+    description: Pika API page with rate limit documentation
+  - url: https://fal.ai/models/fal-ai/pika/v2.2/text-to-video/api
+    description: fal.ai Pika API reference

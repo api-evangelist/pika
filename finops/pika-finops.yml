@@ -1,0 +1,162 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+provider: Pika
+providerId: pika
+created: '2026-06-12'
+modified: '2026-06-12'
+description: >
+  FinOps profile for Pika AI video generation API. Pika offers two cost models:
+  a consumer subscription credit system and a developer pay-per-use model via fal.ai.
+  The API tier is FOCUS-aligned metered billing with costs driven by resolution
+  and duration of generated videos.
+
+billingModel:
+  type: hybrid
+  description: >
+    Consumer subscriptions use pre-purchased monthly credit bundles (freemium through
+    enterprise tiers). Developer API access via fal.ai uses pure pay-per-use metered
+    billing with no minimum commitment.
+  consumerModel:
+    type: subscription_credits
+    billingPeriods: [monthly, annual]
+    creditRollover: true
+    unusedCredits: rollover_with_purchase
+  apiModel:
+    type: pay_per_use
+    minimumCommitment: none
+    platform: fal.ai
+    settlementCurrency: USD
+
+focusColumns:
+  - column: ServiceName
+    value: Pika Video API
+  - column: ServiceCategory
+    value: AI and Machine Learning
+  - column: SubAccountName
+    value: fal.ai account
+  - column: ResourceType
+    value: VideoGenerationJob
+  - column: ChargeType
+    values: [Usage, Credit]
+  - column: BilledCurrency
+    value: USD
+  - column: PricingUnit
+    value: per_video
+  - column: Region
+    value: global
+    description: fal.ai handles global distribution; no region selection exposed
+
+meters:
+  - name: text_to_video_720p
+    description: Text-to-video generation at 720p resolution, 5 seconds
+    unit: video
+    pricePerUnit: 0.20
+    currency: USD
+    dimensions:
+      - resolution: 720p
+      - duration_seconds: 5
+    focusMetric: UsageQuantity
+
+  - name: text_to_video_1080p
+    description: Text-to-video generation at 1080p resolution, 5 seconds
+    unit: video
+    pricePerUnit: 0.45
+    currency: USD
+    dimensions:
+      - resolution: 1080p
+      - duration_seconds: 5
+    focusMetric: UsageQuantity
+
+  - name: image_to_video_720p
+    description: Image-to-video generation at 720p, 5 seconds
+    unit: video
+    pricePerUnit: 0.20
+    currency: USD
+    dimensions:
+      - resolution: 720p
+      - duration_seconds: 5
+    focusMetric: UsageQuantity
+
+  - name: image_to_video_1080p
+    description: Image-to-video generation at 1080p, 5 seconds
+    unit: video
+    pricePerUnit: 0.45
+    currency: USD
+    dimensions:
+      - resolution: 1080p
+      - duration_seconds: 5
+    focusMetric: UsageQuantity
+
+  - name: consumer_credits_standard
+    description: Consumer subscription credits - Standard plan (700 credits/month)
+    unit: credits_bundle
+    pricePerUnit: 8.00
+    currency: USD
+    billingPeriod: monthly_annual
+    focusMetric: UsageQuantity
+
+  - name: consumer_credits_pro
+    description: Consumer subscription credits - Pro plan (2300 credits/month)
+    unit: credits_bundle
+    pricePerUnit: 28.00
+    currency: USD
+    billingPeriod: monthly_annual
+    focusMetric: UsageQuantity
+
+  - name: consumer_credits_fancy
+    description: Consumer subscription credits - Fancy plan (6000 credits/month)
+    unit: credits_bundle
+    pricePerUnit: 76.00
+    currency: USD
+    billingPeriod: monthly_annual
+    focusMetric: UsageQuantity
+
+principles:
+  - name: Visibility
+    description: >
+      Track API spend by monitoring fal.ai dashboard usage metrics. Consumer credit
+      consumption is visible in the Pika account under API & Usage section.
+      Enable cost alerting in fal.ai to prevent unexpected overages on pay-per-use
+      API calls.
+    practices:
+      - Monitor fal.ai billing dashboard for per-call usage
+      - Tag API requests with project/application identifiers where supported
+      - Track credit consumption rates against subscription tier limits
+      - Use fal.ai queue status API to audit completed jobs
+
+  - name: Optimization
+    description: >
+      Optimize video generation costs by selecting appropriate resolution for use case
+      (720p vs 1080p saves 55% per generation). Use 5-second durations when 10-second
+      clips are not required. Batch non-urgent generations during off-peak windows.
+      Evaluate consumer subscription credits vs pay-per-use for predictable high-volume
+      workloads.
+    practices:
+      - Use 720p resolution for draft/preview generations; reserve 1080p for finals
+      - Prefer consumer plan credits for high-volume predictable workloads (lower effective CPV)
+      - Implement client-side prompt quality checks to reduce failed/wasted generations
+      - Cache generated video URLs to avoid duplicate generation charges
+      - Evaluate annual vs monthly subscription billing (annual saves ~20%)
+
+costEstimation:
+  examples:
+    - scenario: 100 videos per month at 720p
+      apiCost: 20.00
+      currency: USD
+      note: 100 x $0.20 via fal.ai pay-per-use
+    - scenario: 100 videos per month at 1080p
+      apiCost: 45.00
+      currency: USD
+      note: 100 x $0.45 via fal.ai pay-per-use
+    - scenario: Consumer Standard plan (700 credits)
+      subscriptionCost: 8.00
+      currency: USD
+      billingPeriod: monthly_annual
+      effectiveCPV: ~0.011 to 0.08
+      note: Effective cost per video varies by model mode (10-80 credits per video)
+
+references:
+  - url: https://pika.art/pricing
+    description: Pika consumer pricing tiers
+  - url: https://fal.ai/models/fal-ai/pika/v2.2/text-to-video
+    description: fal.ai Pika 2.2 API pricing

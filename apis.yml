@@ -1,0 +1,75 @@
+aid: pika
+name: Pika
+description: >
+  Pika is an AI-powered video generation platform that allows users and developers to create,
+  edit, and transform video content using natural language prompts, images, and existing video
+  clips. The platform employs advanced diffusion models to produce short-form videos with
+  realistic motion, smooth camera transitions, and detailed scene composition. Pika offers
+  a suite of AI video tools including text-to-video, image-to-video, scene building
+  (Pikascenes), keyframe interpolation (Pikaframes), and specialized transformation features
+  such as Pikaffects, Pikaswaps, and Pikadditions. Developer API access is provided through
+  a partnership with fal.ai, enabling programmatic integration of Pika's Pika 2.2 video
+  models into applications and workflows.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - AI
+  - Video Generation
+  - Text-to-Video
+  - Image-to-Video
+  - Diffusion Models
+  - Generative AI
+  - Media
+  - Creative Tools
+url: https://raw.githubusercontent.com/api-evangelist/pika/refs/heads/main/apis.yml
+created: '2026-06-12'
+modified: '2026-06-12'
+specificationVersion: '0.19'
+apis:
+  - aid: pika-video-api
+    name: Pika Video API
+    description: >
+      RESTful API for programmatic AI video generation powered by Pika 2.2 models via fal.ai.
+      Supports text-to-video, image-to-video, Pikascenes, and Pikaframes endpoints with
+      configurable resolution (720p/1080p), aspect ratios, and durations (5-10 seconds).
+      Authentication uses API key via FAL_KEY environment variable. Pricing is usage-based
+      at $0.20 per 5-second 720p clip and $0.45 per 5-second 1080p clip.
+    humanURL: https://pika.art/api
+    baseURL: https://fal.run/fal-ai/pika
+    tags:
+      - AI
+      - Video Generation
+      - Text-to-Video
+      - Image-to-Video
+      - fal.ai
+    properties:
+      - type: Documentation
+        url: https://fal.ai/models/fal-ai/pika/v2.2/text-to-video
+      - type: APIReference
+        url: https://fal.ai/models/fal-ai/pika/v2.2/text-to-video/api
+      - type: Pricing
+        url: https://pika.art/pricing
+common:
+  - type: Website
+    url: https://pika.art
+  - type: Documentation
+    url: https://fal.ai/models/fal-ai/pika/v2.2/text-to-video
+  - type: GitHubOrganization
+    url: https://github.com/Pika-Labs
+  - type: Blog
+    url: https://pika.art/blog
+  - type: Pricing
+    url: https://pika.art/pricing
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/pika-labs
+  - type: X
+    url: https://x.com/pika_labs
+  - type: Plans
+    url: plans/pika-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/pika-rate-limits.yml
+  - type: FinOps
+    url: finops/pika-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
