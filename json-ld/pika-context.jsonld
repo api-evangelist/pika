@@ -1,0 +1,129 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "pika": "https://pika.art/api#",
+    "fal": "https://fal.ai/models/fal-ai/pika#",
+    "openapi": "https://openapis.org/schema#",
+
+    "VideoObject": "schema:VideoObject",
+    "MediaObject": "schema:MediaObject",
+    "CreativeWork": "schema:CreativeWork",
+    "SoftwareApplication": "schema:SoftwareApplication",
+    "WebAPI": "schema:WebAPI",
+
+    "prompt": {
+      "@id": "pika:prompt",
+      "@type": "schema:Text"
+    },
+    "negativePrompt": {
+      "@id": "pika:negativePrompt",
+      "@type": "schema:Text"
+    },
+    "imageUrl": {
+      "@id": "pika:imageUrl",
+      "@type": "@id"
+    },
+    "resolution": {
+      "@id": "pika:resolution",
+      "@type": "schema:Text"
+    },
+    "duration": {
+      "@id": "schema:duration",
+      "@type": "schema:Integer"
+    },
+    "aspectRatio": {
+      "@id": "schema:videoFrameSize",
+      "@type": "schema:Text"
+    },
+    "seed": {
+      "@id": "pika:seed",
+      "@type": "schema:Integer"
+    },
+    "requestId": {
+      "@id": "pika:requestId",
+      "@type": "schema:Text"
+    },
+    "queuePosition": {
+      "@id": "pika:queuePosition",
+      "@type": "schema:Integer"
+    },
+    "queueStatus": {
+      "@id": "pika:queueStatus",
+      "@type": "schema:Text"
+    },
+    "videoUrl": {
+      "@id": "schema:contentUrl",
+      "@type": "@id"
+    },
+    "contentType": {
+      "@id": "schema:encodingFormat",
+      "@type": "schema:Text"
+    },
+    "fileSize": {
+      "@id": "schema:contentSize",
+      "@type": "schema:Integer"
+    },
+    "falKey": {
+      "@id": "pika:falKey",
+      "@type": "schema:Text"
+    },
+    "textToVideo": {
+      "@id": "pika:textToVideo",
+      "@type": "schema:Action"
+    },
+    "imageToVideo": {
+      "@id": "pika:imageToVideo",
+      "@type": "schema:Action"
+    },
+    "pikascenes": {
+      "@id": "pika:pikascenes",
+      "@type": "schema:SoftwareApplication"
+    },
+    "pikaframes": {
+      "@id": "pika:pikaframes",
+      "@type": "schema:SoftwareApplication"
+    },
+    "pikaffects": {
+      "@id": "pika:pikaffects",
+      "@type": "schema:SoftwareApplication"
+    },
+    "pikaswaps": {
+      "@id": "pika:pikaswaps",
+      "@type": "schema:SoftwareApplication"
+    },
+    "pikadditions": {
+      "@id": "pika:pikadditions",
+      "@type": "schema:SoftwareApplication"
+    },
+    "endpointId": {
+      "@id": "fal:endpointId",
+      "@type": "schema:Text"
+    },
+    "baseServer": {
+      "@id": "schema:url",
+      "@type": "@id"
+    }
+  },
+  "@type": "WebAPI",
+  "@id": "https://pika.art/api",
+  "name": "Pika Video Generation API",
+  "description": "AI-powered video generation API for creating, editing, and transforming video content using natural language prompts and images via fal.ai.",
+  "url": "https://pika.art/api",
+  "documentation": "https://fal.ai/models/fal-ai/pika/v2.2/text-to-video/api",
+  "baseServer": "https://queue.fal.run",
+  "provider": {
+    "@type": "Organization",
+    "name": "Pika Labs",
+    "url": "https://pika.art",
+    "sameAs": [
+      "https://github.com/Pika-Labs",
+      "https://www.linkedin.com/company/pika-labs",
+      "https://x.com/pika_labs"
+    ]
+  },
+  "apiPlatform": {
+    "@type": "SoftwareApplication",
+    "name": "fal.ai",
+    "url": "https://fal.ai"
+  }
+}

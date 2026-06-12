@@ -49,6 +49,18 @@ apis:
         url: https://fal.ai/models/fal-ai/pika/v2.2/text-to-video/api
       - type: Pricing
         url: https://pika.art/pricing
+      - type: OpenAPI
+        url: openapi/pika-text-to-video-openapi.yml
+      - type: OpenAPI
+        url: openapi/pika-image-to-video-openapi.yml
+      - type: JSONSchema
+        url: json-schema/pika-video-request-schema.json
+      - type: JSONSchema
+        url: json-schema/pika-video-response-schema.json
+      - type: Examples
+        url: examples/pika-text-to-video-example.json
+      - type: Examples
+        url: examples/pika-image-to-video-example.json
 common:
   - type: Website
     url: https://pika.art
@@ -70,6 +82,12 @@ common:
     url: rate-limits/pika-rate-limits.yml
   - type: FinOps
     url: finops/pika-finops.yml
+  - type: Vocabulary
+    url: vocabulary/pika-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/pika-context.jsonld
+  - type: Blog
+    url: blogs/blogs.json
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/pika/main/json-schema/pika-video-response-schema.json",
+  "title": "PikaVideoResponse",
+  "description": "Response schema for completed Pika 2.2 video generation requests.",
+  "type": "object",
+  "required": ["video"],
+  "properties": {
+    "video": {
+      "type": "object",
+      "description": "The generated video file.",
+      "required": ["url"],
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL where the generated video can be downloaded from."
+        },
+        "content_type": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "null" }
+          ],
+          "description": "The MIME type of the video file.",
+          "examples": ["video/mp4"]
+        },
+        "file_name": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "null" }
+          ],
+          "description": "The filename of the generated video.",
+          "examples": ["output.mp4"]
+        },
+        "file_size": {
+          "oneOf": [
+            { "type": "integer" },
+            { "type": "null" }
+          ],
+          "description": "The size of the video file in bytes.",
+          "examples": [4404019]
+        }
+      }
+    }
+  }
+}

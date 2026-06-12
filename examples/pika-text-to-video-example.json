@@ -1,0 +1,35 @@
+{
+  "title": "Pika 2.2 Text-to-Video Example",
+  "description": "A complete request/response example for the Pika 2.2 text-to-video API via fal.ai queue.",
+  "request": {
+    "endpoint": "POST https://queue.fal.run/fal-ai/pika/v2.2/text-to-video",
+    "headers": {
+      "Authorization": "Key YOUR_FAL_KEY",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "prompt": "A golden retriever puppy running through a field of wildflowers at golden hour, camera slowly zooms in, soft bokeh background, cinematic 4K quality",
+      "negative_prompt": "ugly, bad, terrible, blurry, distorted",
+      "aspect_ratio": "16:9",
+      "resolution": "1080p",
+      "duration": 5,
+      "seed": 42
+    }
+  },
+  "queue_response": {
+    "status": "IN_QUEUE",
+    "request_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "response_url": "https://queue.fal.run/fal-ai/pika/v2.2/text-to-video/requests/a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "status_url": "https://queue.fal.run/fal-ai/pika/v2.2/text-to-video/requests/a1b2c3d4-e5f6-7890-abcd-ef1234567890/status",
+    "cancel_url": "https://queue.fal.run/fal-ai/pika/v2.2/text-to-video/requests/a1b2c3d4-e5f6-7890-abcd-ef1234567890/cancel",
+    "queue_position": 0
+  },
+  "result_response": {
+    "video": {
+      "url": "https://storage.googleapis.com/falserverless/example_outputs/pika/pika_t2v_v22_output.mp4",
+      "content_type": "video/mp4",
+      "file_name": "pika_t2v_v22_output.mp4",
+      "file_size": 4404019
+    }
+  }
+}

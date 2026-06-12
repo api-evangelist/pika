@@ -1,0 +1,169 @@
+title: Pika API Vocabulary
+description: Domain vocabulary for the Pika AI video generation API, including terms, concepts, and definitions used across endpoints.
+url: https://pika.art/api
+version: '1.0'
+created: '2026-06-12'
+
+terms:
+
+  - term: prompt
+    label: Prompt
+    definition: >
+      A natural language text description that guides the AI model in generating the desired
+      video content, motion style, camera movement, and visual aesthetic.
+    domain: Input
+    type: string
+
+  - term: negative_prompt
+    label: Negative Prompt
+    definition: >
+      A text description of visual qualities, artifacts, or content to avoid in the generated
+      video. Helps steer the model away from undesirable outputs.
+    domain: Input
+    type: string
+
+  - term: image_url
+    label: Image URL
+    definition: >
+      The URL of a static image to be used as the first frame in image-to-video generation.
+      The model animates this image based on the accompanying prompt.
+    domain: Input
+    type: string (URI)
+
+  - term: resolution
+    label: Resolution
+    definition: >
+      The output video resolution. Pika 2.2 supports 720p (standard) and 1080p (high definition).
+      Higher resolution results in larger file sizes and higher per-clip cost.
+    domain: Input
+    type: enum
+    values:
+      - 720p
+      - 1080p
+
+  - term: duration
+    label: Duration
+    definition: >
+      The length of the generated video clip in seconds. Pika 2.2 supports 5-second and
+      10-second clips.
+    domain: Input
+    type: integer
+    values:
+      - 5
+      - 10
+
+  - term: aspect_ratio
+    label: Aspect Ratio
+    definition: >
+      The width-to-height ratio of the generated video frame. Supports landscape (16:9),
+      portrait (9:16), square (1:1), and various social media formats.
+    domain: Input
+    type: enum
+    values:
+      - "16:9"
+      - "9:16"
+      - "1:1"
+      - "4:5"
+      - "5:4"
+      - "3:2"
+      - "2:3"
+
+  - term: seed
+    label: Seed
+    definition: >
+      An integer value used to initialize the random number generator for reproducible
+      video generation results. Identical seeds with identical inputs produce identical outputs.
+    domain: Input
+    type: integer (nullable)
+
+  - term: request_id
+    label: Request ID
+    definition: >
+      A unique identifier assigned to each generation request when submitted to the fal.ai
+      queue. Used to poll status, retrieve results, or cancel the request.
+    domain: Queue
+    type: string (UUID)
+
+  - term: queue_position
+    label: Queue Position
+    definition: >
+      The current position of a request in the processing queue. A value of 0 indicates
+      the request is next to be processed.
+    domain: Queue
+    type: integer
+
+  - term: status
+    label: Status
+    definition: >
+      The current processing state of a queued generation request.
+    domain: Queue
+    type: enum
+    values:
+      - IN_QUEUE
+      - IN_PROGRESS
+      - COMPLETED
+
+  - term: text-to-video
+    label: Text-to-Video
+    definition: >
+      A video generation mode where only a text prompt is used to create a new video clip.
+      Pika 2.2 uses a two-stage pipeline internally: text-to-image followed by image-to-video.
+    domain: Feature
+    type: concept
+
+  - term: image-to-video
+    label: Image-to-Video
+    definition: >
+      A video generation mode that takes a static image as the first frame and animates it
+      based on a text prompt. Pika 2.2 animates the image with realistic motion and specified
+      camera movement.
+    domain: Feature
+    type: concept
+
+  - term: FAL_KEY
+    label: FAL Key
+    definition: >
+      The API authentication key issued by fal.ai, used to authorize requests to the Pika
+      2.2 API endpoints. Should be passed in the Authorization header as "Key YOUR_FAL_KEY".
+    domain: Authentication
+    type: string
+
+  - term: pikascenes
+    label: Pikascenes
+    definition: >
+      A Pika platform feature for composing multi-scene video sequences by combining
+      multiple generated or uploaded clips into a coherent narrative.
+    domain: Feature
+    type: concept
+
+  - term: pikaframes
+    label: Pikaframes
+    definition: >
+      A Pika platform feature for keyframe interpolation — generating smooth video transitions
+      between two specified keyframe images.
+    domain: Feature
+    type: concept
+
+  - term: pikaffects
+    label: Pikaffects
+    definition: >
+      A Pika platform feature that applies specialized visual transformations and motion
+      effects to existing images or video clips.
+    domain: Feature
+    type: concept
+
+  - term: pikaswaps
+    label: Pikaswaps
+    definition: >
+      A Pika platform feature for replacing or swapping elements within a video using
+      AI-driven content generation.
+    domain: Feature
+    type: concept
+
+  - term: pikadditions
+    label: Pikadditions
+    definition: >
+      A Pika platform feature for adding new visual elements or objects into an existing
+      video scene using generative AI.
+    domain: Feature
+    type: concept

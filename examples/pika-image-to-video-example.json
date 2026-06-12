@@ -1,0 +1,34 @@
+{
+  "title": "Pika 2.2 Image-to-Video Example",
+  "description": "A complete request/response example for the Pika 2.2 image-to-video API via fal.ai queue.",
+  "request": {
+    "endpoint": "POST https://queue.fal.run/fal-ai/pika/v2.2/image-to-video",
+    "headers": {
+      "Authorization": "Key YOUR_FAL_KEY",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "image_url": "https://storage.googleapis.com/falserverless/example_inputs/pika/pika_i2v_v22_input.png",
+      "prompt": "The man and the horse are slowly walking towards the camera, the camera orbits and dolly out",
+      "negative_prompt": "",
+      "resolution": "720p",
+      "duration": 5
+    }
+  },
+  "queue_response": {
+    "status": "IN_QUEUE",
+    "request_id": "f9e8d7c6-b5a4-3210-fedc-ba9876543210",
+    "response_url": "https://queue.fal.run/fal-ai/pika/v2.2/image-to-video/requests/f9e8d7c6-b5a4-3210-fedc-ba9876543210",
+    "status_url": "https://queue.fal.run/fal-ai/pika/v2.2/image-to-video/requests/f9e8d7c6-b5a4-3210-fedc-ba9876543210/status",
+    "cancel_url": "https://queue.fal.run/fal-ai/pika/v2.2/image-to-video/requests/f9e8d7c6-b5a4-3210-fedc-ba9876543210/cancel",
+    "queue_position": 0
+  },
+  "result_response": {
+    "video": {
+      "url": "https://storage.googleapis.com/falserverless/example_outputs/pika/pika_i2v_v22_output.mp4",
+      "content_type": "video/mp4",
+      "file_name": "pika_i2v_v22_output.mp4",
+      "file_size": 3892145
+    }
+  }
+}
