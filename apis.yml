@@ -11,7 +11,7 @@ description: >
   a partnership with fal.ai, enabling programmatic integration of Pika's Pika 2.2 video
   models into applications and workflows.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - AI
   - Video Generation
