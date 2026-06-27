@@ -1,21 +1,17 @@
 {
+  "repo": "pika",
   "title": "Pika Blog",
   "description": "Blog posts from Pika covering product updates, AI video generation features, and platform announcements.",
   "url": "https://pika.art/blog",
-  "rss": null,
-  "note": "No RSS/Atom feed detected on pika.art/blog as of 2026-06-12. Blog content is available at https://pika.art/blog but no machine-readable feed URL was found.",
-  "last_checked": "2026-06-12",
-  "posts": [],
-  "repo": "pika",
   "feeds": [
     {
-      "source": "https://github.com/Pika-Labs",
-      "feed_url": "https://github.com/Pika-Labs",
-      "title": "",
+      "source": "https://pika.art/blog",
+      "feed_url": "",
       "saved": 0,
-      "method": "none"
+      "method": "agent-scrape"
     }
   ],
+  "fetched": "2026-06-27T13:02:19Z",
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "agent_pulled": "2026-06-27"
 }
