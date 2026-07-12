@@ -62,6 +62,10 @@ apis:
       - type: Examples
         url: examples/pika-image-to-video-example.json
 common:
+  - type: DomainSecurity
+    url: security/pika-domain-security.yml
+  - type: Authentication
+    url: authentication/pika-authentication.yml
   - type: Website
     url: https://pika.art
   - type: Documentation
