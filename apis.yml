@@ -62,6 +62,8 @@ apis:
       - type: Examples
         url: examples/pika-image-to-video-example.json
 common:
+  - type: AgenticAccess
+    url: agentic-access/pika-agentic-access.yml
   - type: DomainSecurity
     url: security/pika-domain-security.yml
   - type: Authentication
