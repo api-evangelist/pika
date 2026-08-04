@@ -1,0 +1,253 @@
+openapi: 3.0.4
+info:
+  title: Pika 2.2 Image-to-Video API
+  version: 1.0.0
+  description: >
+    Queue-based API for transforming static images into dynamic videos using the Pika 2.2
+    model via fal.ai. Supports configurable resolution (720p/1080p), duration (5/10 seconds),
+    and accepts image URLs as the first frame for video generation.
+  x-fal-metadata:
+    endpointId: fal-ai/pika/v2.2/image-to-video
+    category: image-to-video
+    playgroundUrl: https://fal.ai/models/fal-ai/pika/v2.2/image-to-video
+    documentationUrl: https://fal.ai/models/fal-ai/pika/v2.2/image-to-video/api
+
+servers:
+  - url: https://queue.fal.run
+
+security:
+  - apiKeyAuth: []
+
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Fal Key
+
+  schemas:
+    QueueStatus:
+      type: object
+      required:
+        - status
+        - request_id
+      properties:
+        status:
+          type: string
+          enum:
+            - IN_QUEUE
+            - IN_PROGRESS
+            - COMPLETED
+        request_id:
+          type: string
+          description: The request id.
+        response_url:
+          type: string
+          description: The response url.
+        status_url:
+          type: string
+          description: The status url.
+        cancel_url:
+          type: string
+          description: The cancel url.
+        logs:
+          type: object
+          description: The logs.
+          additionalProperties: true
+        metrics:
+          type: object
+          description: The metrics.
+          additionalProperties: true
+        queue_position:
+          type: integer
+          description: The queue position.
+
+    File:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: The URL where the file can be downloaded from.
+        content_type:
+          anyOf:
+            - type: string
+            - type: "null"
+          description: The mime type of the file.
+          examples:
+            - image/png
+        file_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          description: The name of the file. It will be auto-generated if not provided.
+          examples:
+            - z9RV14K95DvU.png
+        file_size:
+          anyOf:
+            - type: integer
+            - type: "null"
+          description: The size of the file in bytes.
+          examples:
+            - 4404019
+
+    PikaV22ImageToVideoInput:
+      type: object
+      title: Pika22ImageToVideoRequest
+      description: Request model for Pika 2.2 image-to-video generation
+      required:
+        - prompt
+        - image_url
+      properties:
+        image_url:
+          type: string
+          title: Image Url
+          description: URL of the image to use as the first frame of the video.
+          examples:
+            - https://storage.googleapis.com/falserverless/example_inputs/pika/pika_i2v_v22_input.png
+        prompt:
+          type: string
+          title: Prompt
+          description: Text description of the motion and style to apply to the image.
+          examples:
+            - The man and the horse are slowly walking towards the camera, the camera orbits and dolly out
+        negative_prompt:
+          type: string
+          title: Negative Prompt
+          description: A negative prompt to guide the model away from unwanted features.
+          default: ""
+        resolution:
+          type: string
+          title: Resolution
+          description: The resolution of the generated video.
+          default: "720p"
+          enum:
+            - "720p"
+            - "1080p"
+          examples:
+            - "1080p"
+            - "720p"
+        duration:
+          type: integer
+          title: Duration
+          description: The duration of the generated video in seconds.
+          default: 5
+          enum:
+            - 5
+            - 10
+        seed:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Seed
+          description: The seed for the random number generator.
+
+    PikaV22ImageToVideoOutput:
+      type: object
+      title: Pika22ImageToVideoOutput
+      description: Output model for Pika 2.2 image-to-video generation
+      required:
+        - video
+      properties:
+        video:
+          $ref: '#/components/schemas/File'
+          description: The generated video.
+          examples:
+            - url: https://storage.googleapis.com/falserverless/example_outputs/pika/pika_i2v_v22_output.mp4
+
+    CancelResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the request was cancelled successfully.
+
+paths:
+  /fal-ai/pika/v2.2/image-to-video:
+    post:
+      operationId: submitImageToVideoRequest
+      summary: Submit an image-to-video generation request
+      description: >
+        Submits an image-to-video generation request to the queue. Returns a QueueStatus
+        with a request_id that can be used to poll status and retrieve results.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PikaV22ImageToVideoInput'
+      responses:
+        '200':
+          description: The request was queued successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueStatus'
+
+  /fal-ai/pika/v2.2/image-to-video/requests/{request_id}:
+    get:
+      operationId: getImageToVideoResult
+      summary: Retrieve the result of an image-to-video request
+      description: Returns the completed output for the given request_id once processing is done.
+      parameters:
+        - name: request_id
+          in: path
+          required: true
+          schema:
+            type: string
+            description: Request ID
+      responses:
+        '200':
+          description: Result of the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PikaV22ImageToVideoOutput'
+
+  /fal-ai/pika/v2.2/image-to-video/requests/{request_id}/status:
+    get:
+      operationId: getImageToVideoStatus
+      summary: Check the status of an image-to-video request
+      description: Returns the current queue status for the given request_id.
+      parameters:
+        - name: request_id
+          in: path
+          required: true
+          schema:
+            type: string
+            description: Request ID
+        - name: logs
+          in: query
+          required: false
+          schema:
+            type: number
+            description: Whether to include logs (1) in the response or not (0).
+      responses:
+        '200':
+          description: The request status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueStatus'
+
+  /fal-ai/pika/v2.2/image-to-video/requests/{request_id}/cancel:
+    put:
+      operationId: cancelImageToVideoRequest
+      summary: Cancel a queued image-to-video request
+      description: Cancels a pending or in-progress image-to-video generation request.
+      parameters:
+        - name: request_id
+          in: path
+          required: true
+          schema:
+            type: string
+            description: Request ID
+      responses:
+        '200':
+          description: The request was cancelled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelResponse'

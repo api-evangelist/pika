@@ -1,0 +1,267 @@
+openapi: 3.0.4
+info:
+  title: Pika 2.2 Text-to-Video API
+  version: 1.0.0
+  description: >
+    Queue-based API for generating videos from text descriptions using the Pika 2.2 model
+    via fal.ai. Uses a two-stage process (text-to-image then image-to-video) and supports
+    configurable resolution, aspect ratio, and duration.
+  x-fal-metadata:
+    endpointId: fal-ai/pika/v2.2/text-to-video
+    category: text-to-video
+    playgroundUrl: https://fal.ai/models/fal-ai/pika/v2.2/text-to-video
+    documentationUrl: https://fal.ai/models/fal-ai/pika/v2.2/text-to-video/api
+
+servers:
+  - url: https://queue.fal.run
+
+security:
+  - apiKeyAuth: []
+
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Fal Key
+
+  schemas:
+    QueueStatus:
+      type: object
+      required:
+        - status
+        - request_id
+      properties:
+        status:
+          type: string
+          enum:
+            - IN_QUEUE
+            - IN_PROGRESS
+            - COMPLETED
+        request_id:
+          type: string
+          description: The request id.
+        response_url:
+          type: string
+          description: The response url.
+        status_url:
+          type: string
+          description: The status url.
+        cancel_url:
+          type: string
+          description: The cancel url.
+        logs:
+          type: object
+          description: The logs.
+          additionalProperties: true
+        metrics:
+          type: object
+          description: The metrics.
+          additionalProperties: true
+        queue_position:
+          type: integer
+          description: The queue position.
+
+    File:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: The URL where the file can be downloaded from.
+        content_type:
+          anyOf:
+            - type: string
+            - type: "null"
+          description: The mime type of the file.
+          examples:
+            - image/png
+        file_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          description: The name of the file. It will be auto-generated if not provided.
+          examples:
+            - z9RV14K95DvU.png
+        file_size:
+          anyOf:
+            - type: integer
+            - type: "null"
+          description: The size of the file in bytes.
+          examples:
+            - 4404019
+
+    PikaV22TextToVideoInput:
+      type: object
+      title: Pika22TextToVideoRequest
+      description: Request model for Pika 2.2 text-to-video generation
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          title: Prompt
+          description: Text description of the video to generate.
+          examples:
+            - >
+              Large elegant white poodle standing proudly on the deck of a white yacht,
+              wearing oversized glamorous sunglasses and a luxurious silk Gucci-style scarf
+              tied around its neck, layered pearl necklaces draped across its chest,
+              photographed from outside the yacht at a low upward angle, clear blue sky
+              background, strong midday sunlight, washed-out faded tones, slightly
+              overexposed 2000s fashion editorial aesthetic, cinematic analog film texture,
+              playful luxury mood, glossy magazine style, bright harsh light and soft
+              shadows, stylish and extravagant atmosphere. camera slow orbit and dolly in
+        negative_prompt:
+          type: string
+          title: Negative Prompt
+          description: A negative prompt to guide the model away from unwanted features.
+          default: "ugly, bad, terrible"
+        aspect_ratio:
+          type: string
+          title: Aspect Ratio
+          description: The aspect ratio of the generated video.
+          default: "16:9"
+          enum:
+            - "16:9"
+            - "9:16"
+            - "1:1"
+            - "4:5"
+            - "5:4"
+            - "3:2"
+            - "2:3"
+        resolution:
+          type: string
+          title: Resolution
+          description: The resolution of the generated video.
+          default: "720p"
+          enum:
+            - "1080p"
+            - "720p"
+          examples:
+            - "1080p"
+            - "720p"
+        duration:
+          type: integer
+          title: Duration
+          description: The duration of the generated video in seconds.
+          default: 5
+          enum:
+            - 5
+            - 10
+        seed:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Seed
+          description: The seed for the random number generator.
+
+    PikaV22TextToVideoOutput:
+      type: object
+      title: Pika22TextToVideoOutput
+      description: Output model for Pika 2.2 text-to-video generation
+      required:
+        - video
+      properties:
+        video:
+          $ref: '#/components/schemas/File'
+          description: The generated video.
+          examples:
+            - url: https://storage.googleapis.com/falserverless/example_outputs/pika/pika_t2v_v22_output.mp4
+
+    CancelResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the request was cancelled successfully.
+
+paths:
+  /fal-ai/pika/v2.2/text-to-video:
+    post:
+      operationId: submitTextToVideoRequest
+      summary: Submit a text-to-video generation request
+      description: >
+        Submits a text-to-video generation request to the queue. Returns a QueueStatus
+        with a request_id that can be used to poll status and retrieve results.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PikaV22TextToVideoInput'
+      responses:
+        '200':
+          description: The request was queued successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueStatus'
+
+  /fal-ai/pika/v2.2/text-to-video/requests/{request_id}:
+    get:
+      operationId: getTextToVideoResult
+      summary: Retrieve the result of a text-to-video request
+      description: Returns the completed output for the given request_id once processing is done.
+      parameters:
+        - name: request_id
+          in: path
+          required: true
+          schema:
+            type: string
+            description: Request ID
+      responses:
+        '200':
+          description: Result of the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PikaV22TextToVideoOutput'
+
+  /fal-ai/pika/v2.2/text-to-video/requests/{request_id}/status:
+    get:
+      operationId: getTextToVideoStatus
+      summary: Check the status of a text-to-video request
+      description: Returns the current queue status for the given request_id.
+      parameters:
+        - name: request_id
+          in: path
+          required: true
+          schema:
+            type: string
+            description: Request ID
+        - name: logs
+          in: query
+          required: false
+          schema:
+            type: number
+            description: Whether to include logs (1) in the response or not (0).
+      responses:
+        '200':
+          description: The request status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueStatus'
+
+  /fal-ai/pika/v2.2/text-to-video/requests/{request_id}/cancel:
+    put:
+      operationId: cancelTextToVideoRequest
+      summary: Cancel a queued text-to-video request
+      description: Cancels a pending or in-progress text-to-video generation request.
+      parameters:
+        - name: request_id
+          in: path
+          required: true
+          schema:
+            type: string
+            description: Request ID
+      responses:
+        '200':
+          description: The request was cancelled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelResponse'

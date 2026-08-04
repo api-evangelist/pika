@@ -1,0 +1,14 @@
+{
+  "provider": "pika",
+  "sources": [
+    "pika-fal-ai-api-openapi.yml"
+  ],
+  "outputs": [
+    "pika-fal-ai-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
