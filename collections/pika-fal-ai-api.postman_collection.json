@@ -1,0 +1,913 @@
+{
+  "item": [
+    {
+      "id": "ba4e22bd-8f15-45dd-827c-50e82357e7d6",
+      "name": "Fal Ai",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "94a61a77-ac20-419b-a44d-21b93a0bfb64",
+          "name": "Submit an image-to-video generation request",
+          "request": {
+            "name": "Submit an image-to-video generation request",
+            "description": {
+              "content": "Submits an image-to-video generation request to the queue. Returns a QueueStatus with a request_id that can be used to poll status and retrieve results.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fal-ai",
+                "pika",
+                "v2.2",
+                "image-to-video"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": \"<string>\",\n  \"image_url\": \"<string>\",\n  \"negative_prompt\": \"\",\n  \"resolution\": \"720p\",\n  \"duration\": 5,\n  \"seed\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1c59962f-21e4-4dda-9ae0-19c07d28f04d",
+              "name": "The request was queued successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fal-ai",
+                    "pika",
+                    "v2.2",
+                    "image-to-video"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"image_url\": \"<string>\",\n  \"negative_prompt\": \"\",\n  \"resolution\": \"720p\",\n  \"duration\": 5,\n  \"seed\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"IN_QUEUE\",\n  \"request_id\": \"string\",\n  \"response_url\": \"string\",\n  \"status_url\": \"string\",\n  \"cancel_url\": \"string\",\n  \"logs\": {\n    \"key_0\": true,\n    \"key_1\": false\n  },\n  \"metrics\": {\n    \"key_0\": 1987\n  },\n  \"queue_position\": 7444\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2eba0ac9-14e6-4a7e-ac7d-b8798418c536",
+          "name": "Retrieve the result of an image-to-video request",
+          "request": {
+            "name": "Retrieve the result of an image-to-video request",
+            "description": {
+              "content": "Returns the completed output for the given request_id once processing is done.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fal-ai",
+                "pika",
+                "v2.2",
+                "image-to-video",
+                "requests",
+                ":request_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d1fa0af4-2b33-4f39-a5ba-bd2b8b60fc71",
+              "name": "Result of the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fal-ai",
+                    "pika",
+                    "v2.2",
+                    "image-to-video",
+                    "requests",
+                    ":request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"video\": {\n    \"url\": \"string\",\n    \"content_type\": \"string\",\n    \"file_name\": \"string\",\n    \"file_size\": 7965\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e554ef1-5a81-4244-91b7-cdd8f10a49c7",
+          "name": "Check the status of an image-to-video request",
+          "request": {
+            "name": "Check the status of an image-to-video request",
+            "description": {
+              "content": "Returns the current queue status for the given request_id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fal-ai",
+                "pika",
+                "v2.2",
+                "image-to-video",
+                "requests",
+                ":request_id",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "logs",
+                  "value": "<number>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "34db47fd-c1b7-4cb8-8cd5-42070cdce90e",
+              "name": "The request status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fal-ai",
+                    "pika",
+                    "v2.2",
+                    "image-to-video",
+                    "requests",
+                    ":request_id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "logs",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"IN_QUEUE\",\n  \"request_id\": \"string\",\n  \"response_url\": \"string\",\n  \"status_url\": \"string\",\n  \"cancel_url\": \"string\",\n  \"logs\": {\n    \"key_0\": true,\n    \"key_1\": false\n  },\n  \"metrics\": {\n    \"key_0\": 1987\n  },\n  \"queue_position\": 7444\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d100678-badc-4b82-859f-e9fb2b98283f",
+          "name": "Cancel a queued image-to-video request",
+          "request": {
+            "name": "Cancel a queued image-to-video request",
+            "description": {
+              "content": "Cancels a pending or in-progress image-to-video generation request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fal-ai",
+                "pika",
+                "v2.2",
+                "image-to-video",
+                "requests",
+                ":request_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f0932df-61a6-4b55-8b13-64bd2a973ec9",
+              "name": "The request was cancelled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fal-ai",
+                    "pika",
+                    "v2.2",
+                    "image-to-video",
+                    "requests",
+                    ":request_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "76f980f5-a733-4362-934e-c0d6bb700fce",
+          "name": "Submit a text-to-video generation request",
+          "request": {
+            "name": "Submit a text-to-video generation request",
+            "description": {
+              "content": "Submits a text-to-video generation request to the queue. Returns a QueueStatus with a request_id that can be used to poll status and retrieve results.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fal-ai",
+                "pika",
+                "v2.2",
+                "text-to-video"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": \"<string>\",\n  \"negative_prompt\": \"ugly, bad, terrible\",\n  \"aspect_ratio\": \"16:9\",\n  \"resolution\": \"720p\",\n  \"duration\": 5,\n  \"seed\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "604e5900-5494-4fad-b4cf-d9fd2535ab74",
+              "name": "The request was queued successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fal-ai",
+                    "pika",
+                    "v2.2",
+                    "text-to-video"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"negative_prompt\": \"ugly, bad, terrible\",\n  \"aspect_ratio\": \"16:9\",\n  \"resolution\": \"720p\",\n  \"duration\": 5,\n  \"seed\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"IN_QUEUE\",\n  \"request_id\": \"string\",\n  \"response_url\": \"string\",\n  \"status_url\": \"string\",\n  \"cancel_url\": \"string\",\n  \"logs\": {\n    \"key_0\": true,\n    \"key_1\": false\n  },\n  \"metrics\": {\n    \"key_0\": 1987\n  },\n  \"queue_position\": 7444\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5e1ce710-4412-46ed-a144-e3ded1a0d16d",
+          "name": "Retrieve the result of a text-to-video request",
+          "request": {
+            "name": "Retrieve the result of a text-to-video request",
+            "description": {
+              "content": "Returns the completed output for the given request_id once processing is done.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fal-ai",
+                "pika",
+                "v2.2",
+                "text-to-video",
+                "requests",
+                ":request_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0102e815-f3e3-44f7-82ec-a07412bea9f7",
+              "name": "Result of the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fal-ai",
+                    "pika",
+                    "v2.2",
+                    "text-to-video",
+                    "requests",
+                    ":request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"video\": {\n    \"url\": \"string\",\n    \"content_type\": \"string\",\n    \"file_name\": \"string\",\n    \"file_size\": 2859\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f454db1-f486-47f8-a9c6-aa3ccae36049",
+          "name": "Check the status of a text-to-video request",
+          "request": {
+            "name": "Check the status of a text-to-video request",
+            "description": {
+              "content": "Returns the current queue status for the given request_id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fal-ai",
+                "pika",
+                "v2.2",
+                "text-to-video",
+                "requests",
+                ":request_id",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "logs",
+                  "value": "<number>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5bfb6426-d0fb-4a7e-9b72-b59452ca18b2",
+              "name": "The request status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fal-ai",
+                    "pika",
+                    "v2.2",
+                    "text-to-video",
+                    "requests",
+                    ":request_id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "logs",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"IN_QUEUE\",\n  \"request_id\": \"string\",\n  \"response_url\": \"string\",\n  \"status_url\": \"string\",\n  \"cancel_url\": \"string\",\n  \"logs\": {\n    \"key_0\": true,\n    \"key_1\": false\n  },\n  \"metrics\": {\n    \"key_0\": 1987\n  },\n  \"queue_position\": 7444\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b1d5fe5-2bb6-4c45-8f72-70940a28b4d0",
+          "name": "Cancel a queued text-to-video request",
+          "request": {
+            "name": "Cancel a queued text-to-video request",
+            "description": {
+              "content": "Cancels a pending or in-progress text-to-video generation request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fal-ai",
+                "pika",
+                "v2.2",
+                "text-to-video",
+                "requests",
+                ":request_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6638e89e-7f07-4acd-a2d6-9243de7f3e5f",
+              "name": "The request was cancelled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fal-ai",
+                    "pika",
+                    "v2.2",
+                    "text-to-video",
+                    "requests",
+                    ":request_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://queue.fal.run",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "65aee2b6-70a1-4968-9764-61886016fd11",
+    "name": "Pika 2.2 Image-to-Video Fal Ai API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Queue-based API for transforming static images into dynamic videos using the Pika 2.2 model via fal.ai. Supports configurable resolution (720p/1080p), duration (5/10 seconds), and accepts image URLs as the first frame for video generation.\n",
+      "type": "text/plain"
+    }
+  }
+}

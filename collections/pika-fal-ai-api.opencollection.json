@@ -1,0 +1,174 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pika 2.2 Image-to-Video Fal Ai API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fal Ai",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit an image-to-video generation request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://queue.fal.run/fal-ai/pika/v2.2/image-to-video",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits an image-to-video generation request to the queue. Returns a QueueStatus with a request_id that can be used to poll status and retrieve results.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve the result of an image-to-video request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://queue.fal.run/fal-ai/pika/v2.2/image-to-video/requests/:request_id",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the completed output for the given request_id once processing is done."
+        },
+        {
+          "info": {
+            "name": "Check the status of an image-to-video request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://queue.fal.run/fal-ai/pika/v2.2/image-to-video/requests/:request_id/status",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "logs",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the current queue status for the given request_id."
+        },
+        {
+          "info": {
+            "name": "Cancel a queued image-to-video request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://queue.fal.run/fal-ai/pika/v2.2/image-to-video/requests/:request_id/cancel",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancels a pending or in-progress image-to-video generation request."
+        },
+        {
+          "info": {
+            "name": "Submit a text-to-video generation request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://queue.fal.run/fal-ai/pika/v2.2/text-to-video",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a text-to-video generation request to the queue. Returns a QueueStatus with a request_id that can be used to poll status and retrieve results.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve the result of a text-to-video request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://queue.fal.run/fal-ai/pika/v2.2/text-to-video/requests/:request_id",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the completed output for the given request_id once processing is done."
+        },
+        {
+          "info": {
+            "name": "Check the status of a text-to-video request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://queue.fal.run/fal-ai/pika/v2.2/text-to-video/requests/:request_id/status",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "logs",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the current queue status for the given request_id."
+        },
+        {
+          "info": {
+            "name": "Cancel a queued text-to-video request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://queue.fal.run/fal-ai/pika/v2.2/text-to-video/requests/:request_id/cancel",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancels a pending or in-progress text-to-video generation request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
