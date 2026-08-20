@@ -26,6 +26,15 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/pika.png
 tags:
+  - Artificial Intelligence
+  - Video Generation
+  - Text-to-Video
+  - Image-to-Video
+  - Diffusion Models
+  - Generative AI
+  - Media
+  - Creative Tools
+tags_raw:
   - AI
   - Video Generation
   - Text-to-Video
