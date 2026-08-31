@@ -115,8 +115,6 @@ common:
     url: vocabulary/pika-vocabulary.yml
   - type: JSONLDContext
     url: json-ld/pika-context.jsonld
-  - type: Blog
-    url: blogs/blogs.json
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
