@@ -1,15 +1,14 @@
 aid: pika
 name: Pika
-description: >
-  Pika is an AI-powered video generation platform that allows users and developers to create,
-  edit, and transform video content using natural language prompts, images, and existing video
-  clips. The platform employs advanced diffusion models to produce short-form videos with
-  realistic motion, smooth camera transitions, and detailed scene composition. Pika offers
-  a suite of AI video tools including text-to-video, image-to-video, scene building
-  (Pikascenes), keyframe interpolation (Pikaframes), and specialized transformation features
-  such as Pikaffects, Pikaswaps, and Pikadditions. Developer API access is provided through
-  a partnership with fal.ai, enabling programmatic integration of Pika's Pika 2.2 video
-  models into applications and workflows.
+description: 'Pika is an AI-powered video generation platform that allows users and developers to create, edit,
+  and transform video content using natural language prompts, images, and existing video clips. The platform employs
+  advanced diffusion models to produce short-form videos with realistic motion, smooth camera transitions, and detailed
+  scene composition. Pika offers a suite of AI video tools including text-to-video, image-to-video, scene building
+  (Pikascenes), keyframe interpolation (Pikaframes), and specialized transformation features such as Pikaffects,
+  Pikaswaps, and Pikadditions. Developer API access is provided through a partnership with fal.ai, enabling programmatic
+  integration of Pika''s Pika 2.2 video models into applications and workflows.
+
+  '
 type: Index
 deliveryModel:
   model: saas
@@ -30,31 +29,32 @@ accessModel:
   try_now: true
   public: false
   label: Freemium · Self-serve signup
-  confidence: high
+  confidence: medium
   source:
   - plans
   - authentication
-  generated: '2026-07-22'
+  - security
+  generated: '2026-09-03'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/pika.png
 tags:
-  - Artificial Intelligence
-  - Video Generation
-  - Text-to-Video
-  - Image-to-Video
-  - Diffusion Models
-  - Generative AI
-  - Media
-  - Creative Tools
+- Artificial Intelligence
+- Video Generation
+- Text-to-Video
+- Image-to-Video
+- Diffusion Models
+- Generative AI
+- Media
+- Creative Tools
 tags_raw:
-  - AI
-  - Video Generation
-  - Text-to-Video
-  - Image-to-Video
-  - Diffusion Models
-  - Generative AI
-  - Media
-  - Creative Tools
+- AI
+- Video Generation
+- Text-to-Video
+- Image-to-Video
+- Diffusion Models
+- Generative AI
+- Media
+- Creative Tools
 url: https://raw.githubusercontent.com/api-evangelist/pika/refs/heads/main/apis.yml
 created: '2026-06-12'
 modified: '2026-06-12'
@@ -84,37 +84,64 @@ apis:
     url: examples/pika-text-to-video-example.json
   - type: Examples
     url: examples/pika-image-to-video-example.json
+- aid: pika:pika-art-video-generation-api
+  name: Pika Video Generation API (via fal)
+  tags:
+  - Video Generation
+  - AI Video
+  - Text-to-Video
+  - Image-to-Video
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://pika.art/api
+  baseURL: https://queue.fal.run
+  properties:
+  - url: https://pika.art/api
+    type: Documentation
+  - url: https://blog.fal.ai/pika-api-is-now-powered-by-fal/
+    type: Announcement
+  - url: https://fal.ai/models/fal-ai/pika/v2.2/text-to-video/api
+    type: APIReference
+  description: 'Pika''s official developer access is not hosted by Pika. Pika partnered with fal to serve its Pika
+    2.2 video models on fal''s inference infrastructure, so the pika.art/api page hands developers off to fal.ai.
+    On fal, Pika models are exposed as async queue endpoints (submit / status / result) authenticated with a fal
+    API key (Authorization: Key FAL_KEY). Documented model endpoint IDs include fal-ai/pika/v2.2/text-to-video,
+    fal-ai/pika/v2.2/image-to-video, Pikascenes, and Pikaframes, plus v2.1 variants. Inputs include prompt, resolution
+    (720p/1080p), aspect_ratio, duration (5 or 10 seconds), seed, and negative_prompt. Endpoints below are modeled
+    from fal''s published model pages, not from a Pika-operated OpenAPI definition. No first-party Pika API, OpenAPI
+    document, or public WebSocket surface is published on pika.art.'
 common:
-  - type: AgenticAccess
-    url: agentic-access/pika-agentic-access.yml
-  - type: DomainSecurity
-    url: security/pika-domain-security.yml
-  - type: Authentication
-    url: authentication/pika-authentication.yml
-  - type: Website
-    url: https://pika.art
-  - type: Documentation
-    url: https://fal.ai/models/fal-ai/pika/v2.2/text-to-video
-  - type: GitHubOrganization
-    url: https://github.com/Pika-Labs
-  - type: Blog
-    url: https://pika.art/blog
-  - type: Pricing
-    url: https://pika.art/pricing
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/pika-labs
-  - type: X
-    url: https://x.com/pika_labs
-  - type: Plans
-    url: plans/pika-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/pika-rate-limits.yml
-  - type: FinOps
-    url: finops/pika-finops.yml
-  - type: Vocabulary
-    url: vocabulary/pika-vocabulary.yml
-  - type: JSONLDContext
-    url: json-ld/pika-context.jsonld
+- type: AgenticAccess
+  url: agentic-access/pika-agentic-access.yml
+- type: DomainSecurity
+  url: security/pika-domain-security.yml
+- type: Authentication
+  url: authentication/pika-authentication.yml
+- type: Website
+  url: https://pika.art
+- type: Documentation
+  url: https://fal.ai/models/fal-ai/pika/v2.2/text-to-video
+- type: GitHubOrganization
+  url: https://github.com/Pika-Labs
+- type: Blog
+  url: https://pika.art/blog
+- type: Pricing
+  url: https://pika.art/pricing
+- type: LinkedIn
+  url: https://www.linkedin.com/company/pika-labs
+- type: X
+  url: https://x.com/pika_labs
+- type: Plans
+  url: plans/pika-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/pika-rate-limits.yml
+- type: FinOps
+  url: finops/pika-finops.yml
+- type: Vocabulary
+  url: vocabulary/pika-vocabulary.yml
+- type: JSONLDContext
+  url: json-ld/pika-context.jsonld
+- type: Documentation
+  url: https://pika.art/api
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
