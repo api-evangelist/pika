@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Pika 2.2 Image-to-Video Fal Ai API
   version: 1.0.0
@@ -201,68 +201,47 @@ paths:
       - Fal Ai
 components:
   schemas:
-    PikaV22ImageToVideoInput:
+    QueueStatus:
       type: object
-      title: Pika22ImageToVideoRequest
-      description: Request model for Pika 2.2 image-to-video generation
       required:
-      - prompt
-      - image_url
+      - status
+      - request_id
       properties:
-        image_url:
+        status:
           type: string
-          title: Image Url
-          description: URL of the image to use as the first frame of the video.
-          examples:
-          - https://storage.googleapis.com/falserverless/example_inputs/pika/pika_i2v_v22_input.png
-        prompt:
-          type: string
-          title: Prompt
-          description: Text description of the motion and style to apply to the image.
-          examples:
-          - The man and the horse are slowly walking towards the camera, the camera orbits and dolly out
-        negative_prompt:
-          type: string
-          title: Negative Prompt
-          description: A negative prompt to guide the model away from unwanted features.
-          default: ''
-        resolution:
-          type: string
-          title: Resolution
-          description: The resolution of the generated video.
-          default: 720p
           enum:
-          - 720p
-          - 1080p
-          examples:
-          - 1080p
-          - 720p
-        duration:
+          - IN_QUEUE
+          - IN_PROGRESS
+          - COMPLETED
+        request_id:
+          type: string
+          description: The request id.
+        response_url:
+          type: string
+          description: The response url.
+        status_url:
+          type: string
+          description: The status url.
+        cancel_url:
+          type: string
+          description: The cancel url.
+        logs:
+          type: object
+          description: The logs.
+          additionalProperties: true
+        metrics:
+          type: object
+          description: The metrics.
+          additionalProperties: true
+        queue_position:
           type: integer
-          title: Duration
-          description: The duration of the generated video in seconds.
-          default: 5
-          enum:
-          - 5
-          - 10
-        seed:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Seed
-          description: The seed for the random number generator.
-    PikaV22ImageToVideoOutput:
+          description: The queue position.
+    CancelResponse:
       type: object
-      title: Pika22ImageToVideoOutput
-      description: Output model for Pika 2.2 image-to-video generation
-      required:
-      - video
       properties:
-        video:
-          $ref: '#/components/schemas/File'
-          description: The generated video.
-          examples:
-          - url: https://storage.googleapis.com/falserverless/example_outputs/pika/pika_i2v_v22_output.mp4
+        success:
+          type: boolean
+          description: Whether the request was cancelled successfully.
     PikaV22TextToVideoInput:
       type: object
       title: Pika22TextToVideoRequest
@@ -362,47 +341,68 @@ components:
           description: The size of the file in bytes.
           examples:
           - 4404019
-    QueueStatus:
+    PikaV22ImageToVideoInput:
       type: object
+      title: Pika22ImageToVideoRequest
+      description: Request model for Pika 2.2 image-to-video generation
       required:
-      - status
-      - request_id
+      - prompt
+      - image_url
       properties:
-        status:
+        image_url:
           type: string
+          title: Image Url
+          description: URL of the image to use as the first frame of the video.
+          examples:
+          - https://storage.googleapis.com/falserverless/example_inputs/pika/pika_i2v_v22_input.png
+        prompt:
+          type: string
+          title: Prompt
+          description: Text description of the motion and style to apply to the image.
+          examples:
+          - The man and the horse are slowly walking towards the camera, the camera orbits and dolly out
+        negative_prompt:
+          type: string
+          title: Negative Prompt
+          description: A negative prompt to guide the model away from unwanted features.
+          default: ''
+        resolution:
+          type: string
+          title: Resolution
+          description: The resolution of the generated video.
+          default: 720p
           enum:
-          - IN_QUEUE
-          - IN_PROGRESS
-          - COMPLETED
-        request_id:
-          type: string
-          description: The request id.
-        response_url:
-          type: string
-          description: The response url.
-        status_url:
-          type: string
-          description: The status url.
-        cancel_url:
-          type: string
-          description: The cancel url.
-        logs:
-          type: object
-          description: The logs.
-          additionalProperties: true
-        metrics:
-          type: object
-          description: The metrics.
-          additionalProperties: true
-        queue_position:
+          - 720p
+          - 1080p
+          examples:
+          - 1080p
+          - 720p
+        duration:
           type: integer
-          description: The queue position.
-    CancelResponse:
+          title: Duration
+          description: The duration of the generated video in seconds.
+          default: 5
+          enum:
+          - 5
+          - 10
+        seed:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Seed
+          description: The seed for the random number generator.
+    PikaV22ImageToVideoOutput:
       type: object
+      title: Pika22ImageToVideoOutput
+      description: Output model for Pika 2.2 image-to-video generation
+      required:
+      - video
       properties:
-        success:
-          type: boolean
-          description: Whether the request was cancelled successfully.
+        video:
+          $ref: '#/components/schemas/File'
+          description: The generated video.
+          examples:
+          - url: https://storage.googleapis.com/falserverless/example_outputs/pika/pika_i2v_v22_output.mp4
   securitySchemes:
     apiKeyAuth:
       type: apiKey

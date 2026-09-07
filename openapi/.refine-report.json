@@ -9,6 +9,9 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "pika-fal-ai-api-openapi.yml: upgraded openapi 3.0.4 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }
